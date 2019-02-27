@@ -7,11 +7,13 @@ var ToSoutheastState = require('ToSoutheastState');
 var ToSouthwestState = require('ToSouthwestState');
 var ToNorthwestState = require('ToNorthwestState');
 
+
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        HP: 1
+        HP: 1,
+        heroID: 0
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -29,14 +31,13 @@ cc.Class({
         this.ToSoutheastState = new ToSoutheastState;//东南
         this.ToSouthwestState = new ToSouthwestState;//西南
         this.ToNorthwestState = new ToNorthwestState(); //西北
-        // this.BeUsuriousState = new BeUsuriousState();//吃人
-
-
     },
 
     start () {
         
     },
+
+
 
     setHeroState: function (state) {
         this._state = state;
@@ -51,40 +52,36 @@ cc.Class({
         return this._state;
     },
 
-    beUserious: function () {
-        // this._state.beUserious();
+    toEast: function (teamDA) {
+        this._state.toEast(teamDA);
     },
 
-    toEast: function () {
-        this._state.toEast(this.node);
+    toWest: function (teamDA) {
+        this._state.toWest(teamDA);
     },
 
-    toWest: function () {
-        this._state.toWest(this.node);
+    toSouth: function (teamDA) {
+        this._state.toSouth(teamDA);
     },
 
-    toSouth: function () {
-        this._state.toSouth(this.node);
+    toNorth: function (teamDA) {
+        this._state.toNorth(teamDA);
     },
 
-    toNorth: function () {
-        this._state.toNorth(this.node);
+    toNortheast: function (teamDA) {
+        this._state.toNortheast(teamDA);
     },
 
-    toNortheast: function () {
-        this._state.toNortheast(this.node);
+    toSoutheast: function (teamDA) {
+        this._state.toSoutheast(teamDA);
     },
 
-    toSoutheast: function () {
-        this._state.toSoutheast(this.node);
+    toSouthwest: function (teamDA) {
+        this._state.toSouthwest(teamDA);
     },
 
-    toSouthwest: function () {
-        this._state.toSouthwest(this.node);
-    },
-
-    toNorthwest: function () {
-        this._state.toNorthwest(this.node);
+    toNorthwest: function (teamDA) {
+        this._state.toNorthwest(teamDA);
     }
 
     // update (dt) {},

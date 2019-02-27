@@ -5,6 +5,7 @@ var SoundManager = require('SoundManager');
 var GamePlatform = require('GamePlatform');
 var Until = require('Until');
 var CommonRes = require('CommonRes');
+var MobileAzimuth = require('MobileAzimuth');
 
 var GameControl = (function() {
     var _gameControl = null;
@@ -30,6 +31,7 @@ var GameControl = (function() {
         cc.GamePlatform = new GamePlatform();
         cc.Utl = new Until();
         cc.CommRes = new CommonRes();
+        cc.MobileAzimuth = new MobileAzimuth();
         return true; 
     }
 

@@ -12,13 +12,13 @@ cc.Class({
     // onLoad () {},
 
     start () {
-
+        // var MobileAzimuth = require('MobileAzimuth');
+        // this.mobileAzimuth = new MobileAzimuth();
     },
 
     onCollisionEnter: function (other, self) {
         this.node.parent.removeChild(this.node);
-        var hero = other.node.getComponent('Hero');
-        
+        cc.MobileAzimuth.beUserious();
     },
 
     onCollisionStay: function (other, self) {

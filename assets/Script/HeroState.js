@@ -23,29 +23,29 @@ var HeroState = cc.Class({
         this._hero = hero;
     },
 
-    toEast: function (heroNode) {
-    },
+    // toEast: function () {
+    // },
 
-    toWest: function (heroNode) {
-    },
+    // toWest: function () {
+    // },
 
-    toSouth: function (heroNode) {
-    },
+    // toSouth: function () {
+    // },
 
-    toNorth: function (heroNode) {
-    },
+    // toNorth: function () {
+    // },
 
-    toNortheast: function (heroNode) {
-    },
+    // toNortheast: function () {
+    // },
 
-    toSoutheast: function (heroNode) {
-    },
+    // toSoutheast: function () {
+    // },
 
-    toSouthwest: function (heroNode) {
-    },
+    // toSouthwest: function () {
+    // },
 
-    toNorthwest: function (heroNode) {
-    },
+    // toNorthwest: function () {
+    // },
 
     // update (dt) {},
 });

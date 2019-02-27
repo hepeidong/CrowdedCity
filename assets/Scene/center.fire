@@ -59,7 +59,7 @@
         "__id__": 3
       },
       {
-        "__id__": 10
+        "__id__": 11
       },
       {
         "__id__": 6
@@ -69,10 +69,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 15
+        "__id__": 16
       },
       {
-        "__id__": 16
+        "__id__": 17
       }
     ],
     "_prefab": null,
@@ -226,7 +226,9 @@
         "__id__": 9
       }
     ],
-    "_prefab": null,
+    "_prefab": {
+      "__id__": 10
+    },
     "_id": "42x+eCNGJMa7pUS2NN1oeo",
     "_opacity": 255,
     "_color": {
@@ -296,7 +298,8 @@
     "node": {
       "__id__": 6
     },
-    "_enabled": true
+    "_enabled": true,
+    "HP": 1
   },
   {
     "__type__": "cc.BoxCollider",
@@ -319,6 +322,17 @@
     }
   },
   {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 6
+    },
+    "asset": {
+      "__uuid__": "4da9fb99-2170-47a9-9abf-cfba98d3d094"
+    },
+    "fileId": "42x+eCNGJMa7pUS2NN1oeo",
+    "sync": false
+  },
+  {
     "__type__": "cc.Node",
     "_name": "RockerNode",
     "_objFlags": 0,
@@ -327,17 +341,17 @@
     },
     "_children": [
       {
-        "__id__": 11
+        "__id__": 12
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 13
+        "__id__": 14
       },
       {
-        "__id__": 14
+        "__id__": 15
       }
     ],
     "_prefab": null,
@@ -382,14 +396,14 @@
     "_name": "Rocker",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 10
+      "__id__": 11
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 12
+        "__id__": 13
       }
     ],
     "_prefab": null,
@@ -434,7 +448,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 11
+      "__id__": 12
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -460,7 +474,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 10
+      "__id__": 11
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -486,7 +500,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 10
+      "__id__": 11
     },
     "_enabled": true
   },

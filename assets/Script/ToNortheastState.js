@@ -29,46 +29,49 @@ cc.Class({
 
     },
 
-    toNortheast: function (heroNode) {
-        console.error('向东北走');
+    toNortheast: function (teamDisArr) {
         var v = Math.sqrt(Math.pow(this._speed, 2) / 2)
-        heroNode.x += v;
-        heroNode.y += v;
+        this._hero.node.x += v;
+        this._hero.node.y += v;
+        for (let i = 0; i < teamDisArr.teamPos.length; ++i) {
+            teamDisArr.teamPos[i].x += v;
+            teamDisArr.teamPos[i].y += v;
+        }
     },
 
-    toSouth: function (heroNode) {
+    toSouth: function (teamDisArr) {
         this._hero.setHeroState(this._hero.ToSouthState);
-        this._hero.getHeroState().toSouth(heroNode);
+        this._hero.getHeroState().toSouth(teamDisArr);
     },
 
-    toSoutheast: function (heroNode) {
+    toSoutheast: function (teamDisArr) {
         this._hero.setHeroState(this._hero.ToSoutheastState);
-        this._hero.getHeroState().toSoutheast(heroNode);
+        this._hero.getHeroState().toSoutheast(teamDisArr);
     },
 
-    toSouthwest: function (heroNode) {
+    toSouthwest: function (teamDisArr) {
         this._hero.setHeroState(this._hero.ToSouthwestState);
-        this._hero.getHeroState().toSouthwest(heroNode);
+        this._hero.getHeroState().toSouthwest(teamDisArr);
     },
 
-    toNorth: function (heroNode) {
+    toNorth: function (teamDisArr) {
         this._hero.setHeroState(this._hero.ToNorthState);
-        this._hero.getHeroState().toNorth(heroNode);
+        this._hero.getHeroState().toNorth(teamDisArr);
     },
 
-    toEast: function (heroNode) {
+    toEast: function (teamDisArr) {
         this._hero.setHeroState(this._hero.ToEastState);
-        this._hero.getHeroState().toEast(heroNode);
+        this._hero.getHeroState().toEast(teamDisArr);
     },
 
-    toWest: function (heroNode) {
+    toWest: function (teamDisArr) {
         this._hero.setHeroState(this._hero.ToWestState);
-        this._hero.getHeroState().toWest(heroNode);
+        this._hero.getHeroState().toWest(teamDisArr);
     },
 
-    toNorthwest: function (heroNode) {
+    toNorthwest: function (teamDisArr) {
         this._hero.setHeroState(this._hero.ToNorthwestState);
-        this._hero.getHeroState().toNorthwest(heroNode);
+        this._hero.getHeroState().toNorthwest(teamDisArr);
     }
 
     // update (dt) {},

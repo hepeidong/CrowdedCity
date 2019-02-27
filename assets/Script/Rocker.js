@@ -39,9 +39,6 @@ cc.Class({
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onMoveEvent.bind(this), this);
         this.node.on(cc.Node.EventType.TOUCH_END, this.onEndEvent.bind(this), this);
         this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onCancelEvent.bind(this), this);
-
-        this.hero = cc.find('Canvas').getChildByName('Hero').getComponent('Hero');
-        this.hero.setHeroState(this.hero.ToEastState);
     },
 
     start () {
@@ -91,35 +88,35 @@ cc.Class({
     eightDirectionExcute: function (angle) {
         if (this.directionOfAngle(angle) == direction.EAST) {
             //东
-            this.hero.toEast();
+            cc.MobileAzimuth.toEast();
         }
         else if (this.directionOfAngle(angle) == direction.NORTH) {
             //北
-            this.hero.toNorth();
+            cc.MobileAzimuth.toNorth();
         }
         else if (this.directionOfAngle(angle) == direction.WEST) {
             //西
-            this.hero.toWest();
+            cc.MobileAzimuth.toWest();
         }
         else if (this.directionOfAngle(angle) == direction.SOUTH) {
             //南
-            this.hero.toSouth();
+            cc.MobileAzimuth.toSouth();
         }
         else if (this.directionOfAngle(angle) == direction.NORTH_EAST) {
             //东北
-            this.hero.toNortheast();
+            cc.MobileAzimuth.toNortheast();
         }
         else if (this.directionOfAngle(angle) == direction.NORTH_WEST) {
             //西北
-            this.hero.toNorthwest();
+            cc.MobileAzimuth.toNorthwest();
         }
         else if (this.directionOfAngle(angle) == direction.SOUTH_WEST) {
             //西南
-            this.hero.toSouthwest();
+            cc.MobileAzimuth.toSouthwest();
         }
         else if (this.directionOfAngle(angle) == direction.SOUTH_EAST) {
             //东南
-            this.hero.toSoutheast();
+            cc.MobileAzimuth.toSoutheast();
         }
     },
 
@@ -150,7 +147,7 @@ cc.Class({
         this.rocker.y = 0;
         this.rockerPosition.x = 0;
         this.rockerPosition.y = 0;
-        this.angle = null;
+        // this.angle = null;
     },
 
     onCancelEvent: function (event) {
@@ -158,7 +155,7 @@ cc.Class({
         this.rocker.y = 0;
         this.rockerPosition.x = 0;
         this.rockerPosition.y = 0;
-        this.angle = null;
+        // this.angle = null;
     },
 
     update (dt) {
