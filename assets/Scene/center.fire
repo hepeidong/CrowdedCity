@@ -299,7 +299,16 @@
       "__id__": 6
     },
     "_enabled": true,
-    "HP": 1
+    "HP": 1,
+    "heroID": 0,
+    "row": 0,
+    "col": 0,
+    "moveDirRot": 0,
+    "moveDirVec": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    }
   },
   {
     "__type__": "cc.BoxCollider",

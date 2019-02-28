@@ -30,7 +30,7 @@ cc.Class({
     },
 
     toWest: function (teamDisArr) {
-        this._hero.node.x -= this._speed;
+        this._hero.node.x -= this._hero.moveDirVec.x * this._speed;
         for (let i = 0; i < teamDisArr.teamPos.length; ++i) {
             teamDisArr.teamPos[i].x -= this._speed;
         }

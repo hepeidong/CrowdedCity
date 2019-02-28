@@ -1,21 +1,17 @@
 //队员分布阵列
 var TeamDistributionArr = {
     array: [
-        [-1, 1],
-        [-1, 0, 1],
-        [-2, -1, 1, 2],
-        [-2, -1, 1, 2],
-        [-2, -1, 1, 2],
-        [-2, -1, 1, 2],
-        [-2, -1, 1, 2],
-        [-2, -1, 1, 2],
-        [-2, -1, 1, 2],
-        [-1, 0, 1],
-        [-1, 0, 1],
-        [-1, 1]
+        [-1.5, -0.5, 0.5, 1.5],
+        [-1.5, -0.5, 0.5, 1.5],
+        [-1.5, -0.5, 0.5, 1.5],
+        [-1.5, -0.5, 0.5, 1.5],
+        [-1.5, -0.5, 0.5, 1.5],
+        [-1.5, -0.5, 0.5, 1.5],
+        [-1.5, -0.5, 0.5, 1.5],
+        [-1.5, -0.5, 0.5, 1.5]
     ],
-    rowSpacing: 80,//行间距
-    colSpacing: 100,//列间距
+    rowSpacing: 30,//行间距
+    colSpacing: 30,//列间距
     teamPos: []
 }
 
@@ -35,35 +31,12 @@ cc.Class({
     },
 
     ctor() {
-        this.azimuth = {
-            ERROR: 0,
-            TO_EAST: 1,
-            TO_NORTH: 2,
-            TO_WEST: 3,
-            TO_SOUTH: 4,
-            TO_NORTHEAST: 5,
-            TO_NORTHWEST: 6,
-            TO_SOUTHWEST: 7,
-            TO_SOUTHEAST: 8
-        }
-
         this.heros = [];
         this.newHero = cc.find('Canvas').getChildByName('Hero');
+        this.heroWidth = this.newHero.getContentSize().width;
+        this.heroHeight = this.newHero.getContentSize().height;
         this.heros.push(this.newHero.getComponent('Hero'));
         this.heros[this.heros.length - 1].setHeroState(this.heros[this.heros.length - 1].ToEastState);
-        this.initTeamPos(this.newHero);
-        
-    },
-
-    initTeamPos: function (node) {
-        for (let i = 0; i < TeamDistributionArr.array.length; ++i) {
-            for (let j = 0; j < TeamDistributionArr.array[i].length; ++j) {
-                var y = TeamDistributionArr.array[i][j]*TeamDistributionArr.colSpacing + node.y;
-                var x = node.x - TeamDistributionArr.rowSpacing * (i + 1);
-                TeamDistributionArr.teamPos.push({x: x, y: y});
-            }
-        }
-        // console.log(TeamDistributionArr.teamPos);
     },
 
     beUserious: function () {
@@ -82,50 +55,136 @@ cc.Class({
 
 
     toEast: function () {
+        TeamDistributionArr.teamPos = null;
+        TeamDistributionArr.teamPos = [];
+        for (let i = 0; i < TeamDistributionArr.array.length; ++i) {
+            for (let j = 0; j < TeamDistributionArr.array[i].length; ++j) {
+                var y = -TeamDistributionArr.array[i][j]*(this.heroHeight + TeamDistributionArr.colSpacing) + this.newHero.y;
+                var x = this.newHero.x - this.heroWidth / 2 * i - TeamDistributionArr.rowSpacing;
+                TeamDistributionArr.teamPos.push({x: x, y: y});
+            }
+        }
         for (let i = 0; i < this.heros.length; ++i) {
             this.heros[i].toEast(TeamDistributionArr);
         }
     },
 
     toWest: function () {
+        TeamDistributionArr.teamPos = null;
+        TeamDistributionArr.teamPos = [];
+        for (let i = 0; i < TeamDistributionArr.array.length; ++i) {
+            for (let j = 0; j < TeamDistributionArr.array[i].length; ++j) {
+                var y = -TeamDistributionArr.array[i][j]*(this.heroHeight + TeamDistributionArr.colSpacing) + this.newHero.y;
+                var x = this.newHero.x + this.heroWidth / 2 * i + TeamDistributionArr.rowSpacing;
+                TeamDistributionArr.teamPos.push({x: x, y: y});
+            }
+        }
         for (let i = 0; i < this.heros.length; ++i) {
             this.heros[i].toWest(TeamDistributionArr);
         }
     },
 
     toSouth: function () {
+        TeamDistributionArr.teamPos = null;
+        TeamDistributionArr.teamPos = [];
+        for (let i = 0; i < TeamDistributionArr.array.length; ++i) {
+            for (let j = 0; j < TeamDistributionArr.array[i].length; ++j) {
+                var x = -TeamDistributionArr.array[i][j]*(this.heroWidth + TeamDistributionArr.colSpacing) + this.newHero.x;
+                var y = this.newHero.y + this.heroHeight / 2 * i + TeamDistributionArr.rowSpacing;
+                TeamDistributionArr.teamPos.push({x: x, y: y});
+            }
+        }
         for (let i = 0; i < this.heros.length; ++i) {
             this.heros[i].toSouth(TeamDistributionArr);
         }
     },
 
     toNorth: function () {
+        TeamDistributionArr.teamPos = null;
+        TeamDistributionArr.teamPos = [];
+        for (let i = 0; i < TeamDistributionArr.array.length; ++i) {
+            for (let j = 0; j < TeamDistributionArr.array[i].length; ++j) {
+                var x = TeamDistributionArr.array[i][j]*(this.heroWidth + TeamDistributionArr.colSpacing) + this.newHero.x;
+                var y = this.newHero.y - this.heroHeight / 2 * i - TeamDistributionArr.rowSpacing;
+                TeamDistributionArr.teamPos.push({x: x, y: y});
+            }
+        }
         for (let i = 0; i < this.heros.length; ++i) {
             this.heros[i].toNorth(TeamDistributionArr);
         }
     },
 
     toNortheast: function () {
+        TeamDistributionArr.teamPos = null;
+        TeamDistributionArr.teamPos = [];
+        for (let i = 0; i < TeamDistributionArr.array.length; ++i) {
+            for (let j = 0; j < TeamDistributionArr.array[i].length; ++j) {
+                var L = TeamDistributionArr.array[i][j]*(this.heroWidth + TeamDistributionArr.colSpacing);
+                var L1 = this.heroHeight / 2 * i + TeamDistributionArr.rowSpacing
+                var x = this.newHero.x + L*Math.cos(cc.Utl.radian(45)) - L1*Math.cos(cc.Utl.radian(45));
+                var y = this.newHero.y + L*Math.sin(cc.Utl.radian(45)) - L1*Math.sin(cc.Utl.radian(45));
+                TeamDistributionArr.teamPos.push({x: x, y: y});
+            }
+        }
         for (let i = 0; i < this.heros.length; ++i) {
             this.heros[i].toNortheast(TeamDistributionArr);
         }
     },
 
     toSoutheast: function () {
+        TeamDistributionArr.teamPos = null;
+        TeamDistributionArr.teamPos = [];
+        for (let i = 0; i < TeamDistributionArr.array.length; ++i) {
+            for (let j = 0; j < TeamDistributionArr.array[i].length; ++j) {
+                var L = -TeamDistributionArr.array[i][j]*(this.heroWidth + TeamDistributionArr.colSpacing);
+                var L1 = this.heroHeight / 2 * i + TeamDistributionArr.rowSpacing
+                var x = this.newHero.x + L*Math.cos(cc.Utl.radian(45)) - L1*Math.cos(cc.Utl.radian(45));
+                var y = this.newHero.y + L*Math.sin(cc.Utl.radian(45)) + L1*Math.sin(cc.Utl.radian(45));
+                TeamDistributionArr.teamPos.push({x: x, y: y});
+            }
+        }
         for (let i = 0; i < this.heros.length; ++i) {
             this.heros[i].toSoutheast(TeamDistributionArr);
         }
     },
 
     toSouthwest: function () {
+        TeamDistributionArr.teamPos = null;
+        TeamDistributionArr.teamPos = [];
+        for (let i = 0; i < TeamDistributionArr.array.length; ++i) {
+            for (let j = 0; j < TeamDistributionArr.array[i].length; ++j) {
+                var L = -TeamDistributionArr.array[i][j]*(this.heroWidth + TeamDistributionArr.colSpacing);
+                var L1 = this.heroHeight / 2 * i + TeamDistributionArr.rowSpacing
+                var x = this.newHero.x + L*Math.cos(cc.Utl.radian(45)) + L1*Math.cos(cc.Utl.radian(45));
+                var y = this.newHero.y + L*Math.sin(cc.Utl.radian(45)) + L1*Math.sin(cc.Utl.radian(45));
+                TeamDistributionArr.teamPos.push({x: x, y: y});
+            }
+        }
         for (let i = 0; i < this.heros.length; ++i) {
             this.heros[i].toSouthwest(TeamDistributionArr);
         }
     },
 
     toNorthwest: function () {
+        TeamDistributionArr.teamPos = null;
+        TeamDistributionArr.teamPos = [];
+        for (let i = 0; i < TeamDistributionArr.array.length; ++i) {
+            for (let j = 0; j < TeamDistributionArr.array[i].length; ++j) {
+                var L = TeamDistributionArr.array[i][j]*(this.heroWidth + TeamDistributionArr.colSpacing);
+                var L1 = this.heroHeight / 2 * i + TeamDistributionArr.rowSpacing
+                var x = this.newHero.x + L*Math.cos(cc.Utl.radian(45)) + L1*Math.cos(cc.Utl.radian(45));
+                var y = this.newHero.y - L*Math.sin(cc.Utl.radian(45)) - L1*Math.sin(cc.Utl.radian(45));
+                TeamDistributionArr.teamPos.push({x: x, y: y});
+            }
+        }
         for (let i = 0; i < this.heros.length; ++i) {
             this.heros[i].toNorthwest(TeamDistributionArr);
+        }
+    },
+
+    stand: function () {
+        for (let i = 0; i < this.heros.length; ++i) {
+            this.heros[i].stand();
         }
     }
 

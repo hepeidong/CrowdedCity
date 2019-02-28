@@ -129,7 +129,7 @@ cc.Class({
         this.rockerPosition.x += delta.x;
         this.rockerPosition.y += delta.y;
         this.angle = this.getAngle(this.rockerPosition.x, this.rockerPosition.y);
-        
+        this.eightDirectionExcute(this.angle);
         if (this.getRaduis(this.rockerPosition.x, this.rockerPosition.y) <= this.raduis) {
             this.rocker.x = this.rockerPosition.x;
             this.rocker.y = this.rockerPosition.y;
@@ -147,7 +147,8 @@ cc.Class({
         this.rocker.y = 0;
         this.rockerPosition.x = 0;
         this.rockerPosition.y = 0;
-        // this.angle = null;
+        this.angle = null;
+        cc.MobileAzimuth.stand();
     },
 
     onCancelEvent: function (event) {
@@ -155,12 +156,13 @@ cc.Class({
         this.rocker.y = 0;
         this.rockerPosition.x = 0;
         this.rockerPosition.y = 0;
-        // this.angle = null;
+        this.angle = null;
+        cc.MobileAzimuth.stand();
     },
 
     update (dt) {
         if (this.angle != null) {
-            this.eightDirectionExcute(this.angle);
+            // this.eightDirectionExcute(this.angle);
         }
     },
 });

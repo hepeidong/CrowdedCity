@@ -30,7 +30,7 @@ cc.Class({
     },
 
     toNorth: function (teamDisArr) {
-        this._hero.node.y += this._speed;
+        this._hero.node.y += this._hero.moveDirVec.y * this._speed;
         for (let i = 0; i < teamDisArr.teamPos.length; ++i) {
             teamDisArr.teamPos[i].y += this._speed;
         }
