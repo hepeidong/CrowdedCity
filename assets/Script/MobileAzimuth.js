@@ -12,7 +12,8 @@ var TeamDistributionArr = {
     ],
     rowSpacing: 30,//行间距
     colSpacing: 30,//列间距
-    teamPos: []
+    teamPos: [],
+    teammate: []
 }
 
 cc.Class({
@@ -31,26 +32,50 @@ cc.Class({
     },
 
     ctor() {
-        this.heros = [];
         this.newHero = cc.find('Canvas').getChildByName('Hero');
         this.heroWidth = this.newHero.getContentSize().width;
         this.heroHeight = this.newHero.getContentSize().height;
-        this.heros.push(this.newHero.getComponent('Hero'));
-        this.heros[this.heros.length - 1].setHeroState(this.heros[this.heros.length - 1].ToEastState);
+        this.hero = this.newHero.getComponent('Hero');
+        this.hero.setHeroState(this.hero.ToEastState);
+        this.teamCount = 0;
+        this.initTeamPool();
+    },
+
+    initTeamPool: function () {
+        if (!this.teamPool) {
+            this.teamPool = new cc.NodePool();
+        }
+        if (this.teamPool.size() <= 0) {
+            var len = TeamDistributionArr.array.length*TeamDistributionArr.array[0].length;
+            for (let i = 0; i < len; ++i) {
+                let team = cc.instantiate(this.hero.teammate);
+                this.teamPool.put(team);
+            }
+        }
+    },
+
+    createTeam: function (x, y) {
+        var team = null;
+        if (this.teamPool.size() > 0) {
+            team = this.teamPool.get();
+        }
+        else {
+            team = cc.instantiate(this.hero.teammate);
+            this.teamPool.put(team);
+        }
+        team.parent = cc.find('Canvas');
+        team.x = x;
+        team.y = y;
+        var teamComp = team.getComponent('Teammate');
+        teamComp.setSpeed(this.hero.speed);
+        TeamDistributionArr.teammate.push(teamComp);
     },
 
     beUserious: function () {
-        
-        var newHero = cc.instantiate(this.newHero);
-        // console.log(newHero);
-        if (this.heros.length - 1 != TeamDistributionArr.teamPos.length) {
-            newHero.x = TeamDistributionArr.teamPos[this.heros.length - 1].x;
-            newHero.y = TeamDistributionArr.teamPos[this.heros.length - 1].y;
-            newHero.parent = cc.find('Canvas');
-            this.heros.push(newHero.getComponent('Hero'));
-            this.heros[this.heros.length - 1].setHeroState(this.heros[this.heros.length - 1].ToEastState);
-            this.heros[this.heros.length - 1].heroID++;
-        }
+        var x = TeamDistributionArr.teamPos[this.teamCount].x;
+        var y = TeamDistributionArr.teamPos[this.teamCount].y;
+        this.teamCount++;  
+        this.createTeam(x, y);
     },
 
 
@@ -64,9 +89,7 @@ cc.Class({
                 TeamDistributionArr.teamPos.push({x: x, y: y});
             }
         }
-        for (let i = 0; i < this.heros.length; ++i) {
-            this.heros[i].toEast(TeamDistributionArr);
-        }
+        this.hero.toEast(TeamDistributionArr);
     },
 
     toWest: function () {
@@ -79,9 +102,7 @@ cc.Class({
                 TeamDistributionArr.teamPos.push({x: x, y: y});
             }
         }
-        for (let i = 0; i < this.heros.length; ++i) {
-            this.heros[i].toWest(TeamDistributionArr);
-        }
+        this.hero.toWest(TeamDistributionArr);
     },
 
     toSouth: function () {
@@ -94,9 +115,7 @@ cc.Class({
                 TeamDistributionArr.teamPos.push({x: x, y: y});
             }
         }
-        for (let i = 0; i < this.heros.length; ++i) {
-            this.heros[i].toSouth(TeamDistributionArr);
-        }
+        this.hero.toSouth(TeamDistributionArr);
     },
 
     toNorth: function () {
@@ -109,9 +128,7 @@ cc.Class({
                 TeamDistributionArr.teamPos.push({x: x, y: y});
             }
         }
-        for (let i = 0; i < this.heros.length; ++i) {
-            this.heros[i].toNorth(TeamDistributionArr);
-        }
+        this.hero.toNorth(TeamDistributionArr);
     },
 
     toNortheast: function () {
@@ -126,9 +143,7 @@ cc.Class({
                 TeamDistributionArr.teamPos.push({x: x, y: y});
             }
         }
-        for (let i = 0; i < this.heros.length; ++i) {
-            this.heros[i].toNortheast(TeamDistributionArr);
-        }
+        this.hero.toNortheast(TeamDistributionArr);
     },
 
     toSoutheast: function () {
@@ -143,9 +158,7 @@ cc.Class({
                 TeamDistributionArr.teamPos.push({x: x, y: y});
             }
         }
-        for (let i = 0; i < this.heros.length; ++i) {
-            this.heros[i].toSoutheast(TeamDistributionArr);
-        }
+        this.hero.toSoutheast(TeamDistributionArr);
     },
 
     toSouthwest: function () {
@@ -160,9 +173,7 @@ cc.Class({
                 TeamDistributionArr.teamPos.push({x: x, y: y});
             }
         }
-        for (let i = 0; i < this.heros.length; ++i) {
-            this.heros[i].toSouthwest(TeamDistributionArr);
-        }
+        this.hero.toSouthwest(TeamDistributionArr);
     },
 
     toNorthwest: function () {
@@ -177,15 +188,11 @@ cc.Class({
                 TeamDistributionArr.teamPos.push({x: x, y: y});
             }
         }
-        for (let i = 0; i < this.heros.length; ++i) {
-            this.heros[i].toNorthwest(TeamDistributionArr);
-        }
+        this.hero.toNorthwest(TeamDistributionArr);
     },
 
     stand: function () {
-        for (let i = 0; i < this.heros.length; ++i) {
-            this.heros[i].stand();
-        }
+        this.hero.stand();
     }
 
     // update (dt) {},

@@ -299,6 +299,9 @@
       "__id__": 6
     },
     "_enabled": true,
+    "teammate": {
+      "__uuid__": "4da9fb99-2170-47a9-9abf-cfba98d3d094"
+    },
     "HP": 1,
     "heroID": 0,
     "row": 0,
@@ -308,7 +311,8 @@
       "__type__": "cc.Vec2",
       "x": 0,
       "y": 0
-    }
+    },
+    "speed": 5
   },
   {
     "__type__": "cc.BoxCollider",

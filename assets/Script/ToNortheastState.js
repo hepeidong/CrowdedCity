@@ -30,12 +30,15 @@ cc.Class({
     },
 
     toNortheast: function (teamDisArr) {
-        var v = Math.sqrt(Math.pow(this._speed, 2) / 2)
-        this._hero.node.x += v;
-        this._hero.node.y += v;
+        this._hero.node.rotation = 90 - this._hero.moveDirRot;
+        this._hero.node.x += this._hero.moveDirVec.x * this._hero.speed;
+        this._hero.node.y += this._hero.moveDirVec.y * this._hero.speed;
         for (let i = 0; i < teamDisArr.teamPos.length; ++i) {
-            teamDisArr.teamPos[i].x += v;
-            teamDisArr.teamPos[i].y += v;
+            teamDisArr.teamPos[i].x += this._hero.moveDirVec.x * this._hero.speed;
+            teamDisArr.teamPos[i].y += this._hero.moveDirVec.y * this._hero.speed;
+        }
+        for (let i = 0; i < teamDisArr.teammate.length; ++i) {
+            teamDisArr.teammate[i].rotAndVec(this._hero.node.x, this._hero.node.y);
         }
     },
 

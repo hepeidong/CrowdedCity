@@ -12,7 +12,7 @@ var HeroState = cc.Class({
     // onLoad () {},
 
     ctor() {
-        this._speed = 5;
+        this._hero = null;
     },
 
     start () {
