@@ -46,15 +46,14 @@ cc.Class({
             // s.onC();
             // console.log(fsm);
 
-            for (let i = 0; i < 20; ++i) {
-                var x = Math.random()*500;
-                var y = Math.random()*300;
+            for (let i = 0; i < 10; ++i) {
+                var x = Math.random()*500 - 200;
+                var y = Math.random()*100;
                 var newNode = cc.instantiate(this.enemy);
                 newNode.x = x;
                 newNode.y = y;
                 newNode.parent = this.node;
             }
-            
         }
     },
 

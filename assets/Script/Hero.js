@@ -77,46 +77,113 @@ cc.Class({
         this.moveDirRot = cc.Utl.angle(cc.pToAngle(this.moveDirVec));
     },
 
+    //在水平方向上计算坐标
+    calculateCoordAtLevel: function (teamDisButArr, radian) {
+        teamDisButArr.teamPos = null;
+        teamDisButArr.teamPos = [];
+        for (let i = 0; i < teamDisButArr.array.length; ++i) {
+            for (let j = 0; j < teamDisButArr.array[i].length; ++j) {
+                var y = Math.cos(radian - cc.Utl.radian(180)) * teamDisButArr.array[i][j]*(this.node.width + teamDisButArr.colSpacing) + this.node.y;
+                var x = this.node.x - Math.cos(radian) * this.node.height * (i+1) - Math.cos(radian) * teamDisButArr.rowSpacing * (i+1);
+                teamDisButArr.teamPos.push({x: x, y: y});
+            }
+        }
+        this.teamDA = teamDisButArr;
+    },
+
+    //在垂直方式向上计算坐标
+    calculateCoordAtVertical: function (teamDisButArr, radian) {
+        teamDisButArr.teamPos = null;
+        teamDisButArr.teamPos = [];
+        for (let i = 0; i < teamDisButArr.array.length; ++i) {
+            for (let j = 0; j < teamDisButArr.array[i].length; ++j) {
+                var x = Math.sin(radian) * teamDisButArr.array[i][j]*(this.node.width + teamDisButArr.colSpacing) + this.node.x;
+                var y = this.node.y - Math.sin(radian) * this.node.height * (i+1) - Math.sin(radian) * teamDisButArr.rowSpacing * (i+1);
+                teamDisButArr.teamPos.push({x: x, y: y});
+            }
+        }
+        this.teamDA = teamDisButArr;
+    },
+
+    //在斜率为正的倾斜方向上计算坐标，适用于东北，西南方向
+    calculateCoordAtOblique1: function (teamDisButArr, radian) {
+        teamDisButArr.teamPos = null;
+        teamDisButArr.teamPos = [];
+        for (let i = 0; i < teamDisButArr.array.length; ++i) {
+            for (let j = 0; j < teamDisButArr.array[i].length; ++j) {
+                var L = teamDisButArr.array[i][j]*(this.node.width + teamDisButArr.colSpacing);
+                var L1 = this.node.height * (i+1) + teamDisButArr.rowSpacing * (i+1);
+                var x = this.node.x + L*Math.cos(radian) - L1*Math.cos(radian);
+                var y = this.node.y - L*Math.sin(radian) - L1*Math.sin(radian);
+                teamDisButArr.teamPos.push({x: x, y: y});
+            }
+        }
+        this.teamDA = teamDisButArr;
+    },
+
+    //在斜率为负的倾斜方向上计算坐标，适用于西北，东南方向
+    calculateCoordAtOblique2: function (teamDisButArr, radian) {
+        teamDisButArr.teamPos = null;
+        teamDisButArr.teamPos = [];
+        for (let i = 0; i < teamDisButArr.array.length; ++i) {
+            for (let j = 0; j < teamDisButArr.array[i].length; ++j) {
+                var L = teamDisButArr.array[i][j]*(this.node.width + teamDisButArr.colSpacing);
+                var L1 = this.node.height * (i+1) + teamDisButArr.rowSpacing * (i+1);
+                var x = this.node.x - L*Math.cos(radian) - L1*Math.cos(radian);
+                var y = this.node.y + L*Math.sin(radian) - L1*Math.sin(radian);
+                teamDisButArr.teamPos.push({x: x, y: y});
+            }
+        }
+        this.teamDA = teamDisButArr;
+    },
+
     toEast: function (teamDA) {
         // this._state.toEast(teamDA);
         this.azimuth = azimuth.TO_EAST;
-        this.teamDA = teamDA;
+        // this.teamDA = teamDA;
         var aimVec = cc.p(this.node.x + this.speed, this.node.y);
         this.rotAndVec(aimVec);
+        this.calculateCoordAtLevel(teamDA, cc.pToAngle(this.moveDirVec));
     },
 
     toWest: function (teamDA) {
         // this._state.toWest(teamDA);
         this.azimuth = azimuth.TO_WEST;
-        this.teamDA = teamDA;
+        // this.teamDA = teamDA;
         var aimVec = cc.p(this.node.x - this.speed, this.node.y);
         this.rotAndVec(aimVec);
+        this.calculateCoordAtLevel(teamDA, cc.pToAngle(this.moveDirVec));
     },
 
     toSouth: function (teamDA) {
         // this._state.toSouth(teamDA);
         this.azimuth = azimuth.TO_SOUTH;
-        this.teamDA = teamDA;
+        // this.teamDA = teamDA;
         var aimVec = cc.p(this.node.x, this.node.y - this.speed);
         var selfVec = cc.p(this.node.x, this.node.y);
         this.rotAndVec(aimVec, selfVec);
+        this.calculateCoordAtVertical(teamDA, cc.pToAngle(this.moveDirVec));
     },
 
     toNorth: function (teamDA) {
         // this._state.toNorth(teamDA);
         this.azimuth = azimuth.TO_NORTH;
-        this.teamDA = teamDA;
+        // this.teamDA = teamDA;
         var aimVec = cc.p(this.node.x, this.node.y + this.speed);
         this.rotAndVec(aimVec);
+        this.calculateCoordAtVertical(teamDA, cc.pToAngle(this.moveDirVec));
     },
 
     toNortheast: function (teamDA) {
         // this._state.toNortheast(teamDA);
         this.azimuth = azimuth.TO_NORTHEAST;
-        this.teamDA = teamDA;
+        // this.teamDA = teamDA;
         var v = Math.sqrt(Math.pow(this.speed, 2) / 2);
         var aimVec = cc.p(this.node.x + v, this.node.y + v);
         this.rotAndVec(aimVec);
+        //计算斜率为正的斜方向上的坐标
+        this.calculateCoordAtOblique1(teamDA, cc.pToAngle(this.moveDirVec));
+        // console.log(cc.pToAngle(cc.p(this.node.x, this.node.y)) * 180 / Math.PI);
     },
 
     toSoutheast: function (teamDA) {
@@ -126,6 +193,8 @@ cc.Class({
         var v = Math.sqrt(Math.pow(this.speed, 2) / 2)
         var aimVec = cc.p(this.node.x + v, this.node.y - v);
         this.rotAndVec(aimVec);
+        //计算斜率为负的斜方向上的坐标
+        this.calculateCoordAtOblique2(teamDA, cc.pToAngle(this.moveDirVec));
     },
 
     toSouthwest: function (teamDA) {
@@ -135,6 +204,8 @@ cc.Class({
         var v = Math.sqrt(Math.pow(this.speed, 2) / 2)
         var aimVec = cc.p(this.node.x - v, this.node.y - v);
         this.rotAndVec(aimVec);
+        //计算斜率为正的斜方向上的坐标
+        this.calculateCoordAtOblique1(teamDA, cc.pToAngle(this.moveDirVec));
     },
 
     toNorthwest: function (teamDA) {
@@ -144,6 +215,8 @@ cc.Class({
         var v = Math.sqrt(Math.pow(this.speed, 2) / 2)
         var aimVec = cc.p(this.node.x - v, this.node.y + v);
         this.rotAndVec(aimVec);
+        //计算斜率为负的斜方向上的坐标
+        this.calculateCoordAtOblique2(teamDA, cc.pToAngle(this.moveDirVec));
     },
 
     stand: function () {

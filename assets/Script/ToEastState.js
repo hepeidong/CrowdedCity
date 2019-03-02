@@ -38,7 +38,8 @@ cc.Class({
             teamDisArr.teamPos[i].y += this._hero.moveDirVec.y * this._hero.speed;
         }
         for (let i = 0; i < teamDisArr.teammate.length; ++i) {
-            teamDisArr.teammate[i].rotAndVec(this._hero.node.x, this._hero.node.y);
+            // teamDisArr.teammate[i].rotAndVec(this._hero.node.x, this._hero.node.y);
+            teamDisArr.teammate[i].rotAndVec(teamDisArr.teamPos[i].x, teamDisArr.teamPos[i].y);
         }
     },
 

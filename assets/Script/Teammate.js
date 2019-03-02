@@ -26,6 +26,7 @@ cc.Class({
         this.moveDirRot = cc.Utl.angle(cc.pToAngle(this.moveDirVec));
         this.node.x += this.moveDirVec.x * this.speed;
         this.node.y += this.moveDirVec.y * this.speed;
+        this.node.rotation = 90 - this.moveDirRot;
     },
 
 
