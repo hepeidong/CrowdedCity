@@ -47,5 +47,7 @@ var HeroState = cc.Class({
     // toNorthwest: function () {
     // },
 
-    // update (dt) {},
+    update (dt) {
+        
+    },
 });

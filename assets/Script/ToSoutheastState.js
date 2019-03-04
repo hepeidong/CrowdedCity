@@ -30,7 +30,8 @@ cc.Class({
     },
 
     toSoutheast: function (teamDisArr) {
-        this._hero.node.rotation = 90 - this._hero.moveDirRot;
+        // this._hero.node.rotation = 90 - this._hero.moveDirRot;
+        this._hero.node.scaleX = 1;
         this._hero.node.x += this._hero.moveDirVec.x * this._hero.speed;
         this._hero.node.y += this._hero.moveDirVec.y * this._hero.speed;
         for (let i = 0; i < teamDisArr.teamPos.length; ++i) {
@@ -39,6 +40,8 @@ cc.Class({
         }
         for (let i = 0; i < teamDisArr.teammate.length; ++i) {
             // teamDisArr.teammate[i].rotAndVec(this._hero.node.x, this._hero.node.y);
+            teamDisArr.teammate[i].node.scaleX = this._hero.node.scaleX;
+            teamDisArr.teammate[i].play();
             teamDisArr.teammate[i].rotAndVec(teamDisArr.teamPos[i].x, teamDisArr.teamPos[i].y);
         }
     },

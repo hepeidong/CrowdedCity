@@ -3,6 +3,7 @@ var GameData = require('GameData');
 var GameFile = require('GameFile');
 var SoundManager = require('SoundManager');
 var GamePlatform = require('GamePlatform');
+var AnimationManager = require('AnimationManager');
 var Until = require('Until');
 var CommonRes = require('CommonRes');
 var MobileAzimuth = require('MobileAzimuth');
@@ -23,10 +24,12 @@ var GameControl = (function() {
         if (GameData.getInstance() == null) return false;
         if (GameFile.getInstance() == null) return false;
         if (SoundManager.getInstance() == null) return false;
+        if (AnimationManager.getInstance() == null) return false;
 
         cc.GameData = GameData.Instance;
         cc.GameFile = GameFile.Instance;
         cc.SoundManager = SoundManager.Instance;
+        cc.AnimationMgr = AnimationManager.Instance;
 
         cc.GamePlatform = new GamePlatform();
         cc.Utl = new Until();
